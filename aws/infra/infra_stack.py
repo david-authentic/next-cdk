@@ -34,7 +34,7 @@ class InfraStack(Stack):
                                           },
                                       },
                                       "artifacts": {
-                                          "baseDirectory": "out",
+                                          "baseDirectory": ".next",
                                           "files": "/*"
                                       },
                                       "cache": {
