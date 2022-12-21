@@ -30,7 +30,7 @@ class InfraStack(Stack):
                                               }
                                           },
                                           "build": {
-                                              "commands": ["env-cmd -f .env.${BUILD_ENV} npm run build"]
+                                              "commands": ["env-cmd -f .env.${NODE_ENV} npm run build"]
                                           },
                                       },
                                       "artifacts": {
@@ -46,10 +46,10 @@ class InfraStack(Stack):
                                   )
 
         main = amplify_app.add_branch("main")
-        main.add_environment("BUILD_ENV", "prod")
+        main.add_environment("NODE_ENV", "production")
 
         dev = amplify_app.add_branch("staging",
                                      performance_mode=True
                                      )
 
-        dev.add_environment("BUILD_ENV", "staging")
+        dev.add_environment("NODE_ENV", "staging")
