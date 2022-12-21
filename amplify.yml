@@ -6,7 +6,7 @@ frontend:
         - npm ci
     build:
       commands:
-        - env-cmd -f .env.${BUILD_ENV} npm run build
+        - npx env-cmd -f .env.${BUILD_ENV} && npm run build
   artifacts:
     baseDirectory: .next
     files:
