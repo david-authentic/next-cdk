@@ -12,7 +12,7 @@ class InfraStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        amplify_app = amplify.App(self, "Nextjs",
+        amplify_app = amplify.App(self, "WebClient",
                                   source_code_provider=amplify.GitHubSourceCodeProvider(
                                       owner="david-authentic",
                                       repository="next-cdk",
@@ -22,7 +22,7 @@ class InfraStack(Stack):
                                   ),
                                   auto_branch_deletion=True,
                                   build_spec=codebuild.BuildSpec.from_object_to_yaml({
-                                      "version": "1.0",
+                                      "version": "1.1",
                                       "frontend": {
                                           "phases": {
                                               "preBuild": {
