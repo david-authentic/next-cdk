@@ -22,7 +22,7 @@ class InfraStack(Stack):
                                   ),
                                   auto_branch_deletion=True,
                                   build_spec=codebuild.BuildSpec.from_object_to_yaml({
-                                      "version": "1.0",
+                                      "version": "1.1",
                                       "frontend": {
                                           "phases": {
                                               "preBuild": {
