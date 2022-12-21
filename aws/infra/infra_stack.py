@@ -18,8 +18,9 @@ class InfraStack(Stack):
                                       repository="next-cdk",
                                       oauth_token=SecretValue.secrets_manager(
                                           secret_id="arn:aws:secretsmanager:us-east-1:875073938755:secret:github-token-4059es"
-                                      )
+                                      ),
                                   ),
+                                  auto_branch_deletion=True,
                                   build_spec=codebuild.BuildSpec.from_object_to_yaml({
                                       "version": "1.0",
                                       "frontend": {
@@ -29,7 +30,7 @@ class InfraStack(Stack):
                                               }
                                           },
                                           "build": {
-                                              "commands": ["npm run build"]
+                                              "commands": ["env-cmd -f .env.${BUILD_ENV} npm run build"]
                                           },
                                       },
                                       "artifacts": {
@@ -43,3 +44,12 @@ class InfraStack(Stack):
                                       }
                                   })
                                   )
+
+        main = amplify_app.add_branch("main")
+        main.add_environment("BUILD_ENV", "prod")
+
+        dev = amplify_app.add_branch("staging",
+                                     performance_mode=True
+                                     )
+
+        dev.add_environment("BUILD_ENV", "staging")
