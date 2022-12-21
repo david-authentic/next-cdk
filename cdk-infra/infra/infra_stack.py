@@ -1,7 +1,7 @@
 from aws_cdk import (
     SecretValue,
     Stack,
-    aws_amplify as amplify,
+    aws_amplify_alpha as amplify,
     aws_codebuild as codebuild
 )
 from constructs import Construct
@@ -17,7 +17,7 @@ class InfraStack(Stack):
                                       owner="david-authentic",
                                       repository="next-cdk",
                                       oauth_token=SecretValue.secrets_manager(
-                                          "github-token")
+                                          "arn:aws:secretsmanager:us-east-1:875073938755:secret:github-token-4059es")
                                   ),
                                   build_spec=codebuild.BuildSpec.from_object_to_yaml({
                                       "version": "1.0",
@@ -30,15 +30,15 @@ class InfraStack(Stack):
                                           "build": {
                                               "commands": ["npm run build"]
                                           },
-                                      }
+                                      },
                                       "artifacts": {
-                                          "baseDirectory": "out"
-                                          "files": "**/*"
-                                      }
+                                          "baseDirectory": "out",
+                                          "files": "/*"
+                                      },
                                       "cache": {
-                                          "paths": {
-                                              ["node_modules/**/*"]
-                                          }
+                                          "paths": [
+                                              "node_modules//*"
+                                          ]
                                       }
                                   })
                                   )
