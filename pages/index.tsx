@@ -1,6 +1,6 @@
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       BUILD_ENV: process.env.BUILD_ENV,
