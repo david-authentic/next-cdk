@@ -17,7 +17,8 @@ class InfraStack(Stack):
                                       owner="david-authentic",
                                       repository="next-cdk",
                                       oauth_token=SecretValue.secrets_manager(
-                                          "arn:aws:secretsmanager:us-east-1:875073938755:secret:github-token-4059es")
+                                          secret_id="arn:aws:secretsmanager:us-east-1:875073938755:secret:github-token-4059es"
+                                      )
                                   ),
                                   build_spec=codebuild.BuildSpec.from_object_to_yaml({
                                       "version": "1.0",
